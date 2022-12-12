@@ -7,106 +7,108 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link th:href="@{/main.css}" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <!-- Brand -->
-  <a class="navbar-brand" th:href="@{/}">Vehicle Rental App</a>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<!-- Brand --> <a class="navbar-brand" th:href="@{/}"><strong>Vehicle
+							Rental App</strong></a>
+				</li>
+			</ul>
+			<ul class="navbar-nav nav-flex-icons">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/new}">Add Vehicle</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/book}">Book Vehicle</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/report}">Booked Vehicles Report</a></li>
+			</ul>
+		</div>
+	</nav>
 
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehicles/new}">Add Vehicle</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehicles/book}">Book Vehicle</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehiclesInfo}">Booked Vehicles Report</a>
-      </li>
-    </ul>
-  </div>
-</nav>
 	<div class="cotainer">
 		<div class="row">
 			<div
-				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card mt-3 mb-3">
 				<h1 class="text-center">Add New Vehicle</h1>
 				<div class="card-body">
 					<form th:action="@{/vehicles}" th:object="${vehicle}" method="POST">
 						<div class="form-group">
-							<label>RegNo</label> <input type="text" name="regNo" required
-								th:field="*{regNo}" class="form-cotrol"
+							<label>Reg. No.: </label> <input type="text" name="regNo"
+								required th:field="*{regNo}" class="form-cotrol"
 								placeholder="Enter Registeration Number" />
 						</div>
 
 
 						<div class="form-group">
-							<label>category</label> <input type="text" name="category" required
-								th:field="*{category}" class="form-cotrol"
-								placeholder="Enter category" />
-
-
+							<label>Choose a Vehicle:</label> <select th:field="*{category}"
+								name="category" required id="category">
+								<option th:value="Truck" th:text="Truck"></option>
+								<option th:value="Car" th:text="Car"></option>
+								<option th:value="Bus" th:text="Bus"></option>
+								<option th:value="Bike" th:text="Bike"></option>
+								<option th:value="Scooty" th:text="Scooty"></option>
+								<option th:value="Auto" th:text="Auto"></option>
+							</select>
 						</div>
 
 						<div class="form-group">
-							<label>manufacturer</label> <input type="text"
-								name="manufacturer" required th:field="*{manufacturer}" class="form-cotrol"
-								placeholder="Enter manufacturer" />
-
-
+							<label>Manufacturer: </label> <input type="text"
+								name="manufacturer" required th:field="*{manufacturer}"
+								class="form-cotrol" placeholder="Enter manufacturer" />
 						</div>
 
 						<div class="form-group">
-							<label>rent</label> <input type="text" name="rent" required
-								th:field="*{rent}" class="form-cotrol"
-								placeholder="Enter Registeration Number" />
-
-
+							<label>Rent: </label> <input type="number" name="rent" required
+								th:field="*{rent}" class="form-cotrol" placeholder="Daily Rent" />
 						</div>
 
 						<div class="form-group">
-							<label>mileage</label> 
-							<input type="text" name="mileage" required
-								th:field="*{mileage}" class="form-cotrol"
+							<label>Mileage: </label> <input type="number" name="mileage"
+								required th:field="*{mileage}" class="form-cotrol"
 								placeholder="Enter mileage" />
-
-
 						</div>
 
 						<div class="form-group">
-							<label>fuelType</label> <input type="text" name="fuelType" required
-								th:field="*{fuelType}" class="form-cotrol"
-								placeholder="Enter fuelType " />
-
-
+							<label>Please select Fuel Type:</label> <input type="radio"
+								required id="petrol" name="fuelType" th:field="*{fuelType}"
+								th:value="petrol"> <label for="petrol">Petrol</label> <input
+								type="radio" required id="diesel" name="fuelType"
+								th:field="*{fuelType}" th:value="diesel"> <label
+								for="diesel">Diesel</label> <input type="radio" required
+								id="LPG" name="fuelType" th:field="*{fuelType}" th:value="LPG">
+							<label for="LPG">L.P.G.</label>
 						</div>
 
 						<div class="form-group">
-							<label>description</label> <input type="text" name="description"
-								th:field="*{description}" class="form-cotrol"
+							<label>Description: </label> <input type="text"
+								name="description" th:field="*{description}" class="form-cotrol"
 								placeholder="description" />
 
 
 						</div>
 						<div class=row>
-						<div class="col-sm-6">
-							<button type="submit" class=btn btn-primary onclick="alert('The new vehicle has been saved successfully')">Save</button>
-							
-						</div>
-						
-						<div class="col-sm-6">
-							
-							<a class="btn-link" th:href="@{/}">Cancel</a>
-						</div>
-						
-						
+							<div class="col-sm-6">
+								<button type="submit" class=btn btn-primary
+									onclick="alert('The new vehicle has been saved successfully')">Save</button>
+
+							</div>
+
+							<div class="col-sm-6">
+
+								<a class="btn-link" th:href="@{/}">Cancel</a>
+							</div>
+
+
 						</div>
 
 					</form>

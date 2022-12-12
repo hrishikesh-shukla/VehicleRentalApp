@@ -7,52 +7,57 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link th:href="@{/main.css}" rel="stylesheet" />
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <!-- Brand -->
-  <a class="navbar-brand" th:href="@{/}">Vehicle Rental App</a>
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehicles/new}">Add Vehicle</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehicles/book}">Book Vehicle</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vehiclesInfo}">Booked Vehicles Report</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<!-- Brand --> <a class="navbar-brand" th:href="@{/}"><strong>Vehicle
+							Rental App</strong></a>
+				</li>
+			</ul>
+			<ul class="navbar-nav nav-flex-icons">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/new}">Add Vehicle</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/book}">Book Vehicle</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/vehicles/report}">Booked Vehicles Report</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div class="cotainer">
 		<div class="row">
 			<div
-				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card mt-3 mb-3">
 				<h1 class="text-center">Book a vehicle</h1>
 				<div class="card-body">
-					<form th:action="@{/vehicles/book}" th:object="${bookVehicle}" method="POST">
+					<form th:action="@{/vehicles/book}" th:object="${bookVehicle}"
+						method="POST">
 						<div class="form-group">
 							<label>Customer Name</label> <input type="text" name="name"
 								th:field="*{name}" class="form-cotrol"
 								placeholder="Enter Registeration Number" />
 						</div>
 
-
 						<div class="form-group">
-							<label>Category</label> <input type="text" name="vehicleCategory"
-								th:field="*{category}" class="form-cotrol"
-								placeholder="Enter category" />
-
-
+							<label>Choose a Vehicle:</label> <select th:field="*{category}"
+								name="vehicleCategory" required id="category">
+								<option th:value="Truck" th:text="Truck"></option>
+								<option th:value="Car" th:text="Car"></option>
+								<option th:value="Bus" th:text="Bus"></option>
+								<option th:value="Bike" th:text="Bike"></option>
+								<option th:value="Scooty" th:text="Scooty"></option>
+								<option th:value="Auto" th:text="Auto"></option>
+							</select>
 						</div>
 
 						<div class="form-group">
@@ -64,48 +69,48 @@
 						</div>
 
 						<div class="form-group">
-							<label>Booked From:</label> <input type="text" name="bookedFrom"
+							<label>Booked From:</label> <input type="date" name="bookedFrom"
 								th:field="*{bookedFrom}" class="form-cotrol"
-								placeholder="Enter Registeration Number" />
+								placeholder="Booking From" />
 
 
 						</div>
 
 						<div class="form-group">
-							<label>Booked To:</label> 
-							<input type="text" name="bookedFrom"
+							<label>Booked To:</label> <input type="date" name="bookedFrom"
 								th:field="*{bookedFrom}" class="form-cotrol"
-								placeholder="Enter mileage" />
+								placeholder="Booking Till" />
 
 
 						</div>
 
 						<div class="form-group">
 							<label>Total Rent</label> <input type="text" name="rent"
-								th:field="*{totalRent}" class="form-cotrol"
-								placeholder="Enter fuelType " />
+								th:field="*{totalRent}" class="form-cotrol" readonly="readonly"
+								placeholder="Total Rent " />
 
 
 						</div>
 
 						<div class="form-group">
-							<label>Payment Received</label> <input type="text" name="Payment Received:"
+							<label>Payment Received:</label> <input type="checkbox"
+								id="isPaymentReceived" name="paymentReceived"
 								th:field="*{isPaymentReceived}" class="form-cotrol"
-								placeholder="Payment Received:" />
-
-
+								placeholder="Payment Received:" value="isPaymentReceived"
+								onclick="return false">
 						</div>
 						<div class=row>
-						<div class="col-sm-6">
-							<button type="submit" class=btn btn-primary onclick="alert('The vehicle has been booked successfully')">Save</button>
-						</div>
-						
-						<div class="col-sm-6">
-							
-							<a class="btn-link" th:href="@{/}">Cancel</a>
-						</div>
-						
-						
+							<div class="col-sm-6">
+								<button type="submit" class=btn btn-primary
+									onclick="alert('The vehicle has been booked successfully')">Save</button>
+							</div>
+
+							<div class="col-sm-6">
+
+								<a class="btn-link" th:href="@{/}">Cancel</a>
+							</div>
+
+
 						</div>
 
 					</form>
